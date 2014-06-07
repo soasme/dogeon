@@ -2,23 +2,13 @@
 """
 import re
 import sys
-import struct
 
 from . import scanner
+from ._compact import NaN, PosInf, NegInf, unicode
 
 __all__ = ['DSONDecoder']
 
 FLAGS = re.VERBOSE | re.MULTILINE | re.DOTALL
-
-def _floatconstants():
-    _BYTES = '7FF80000000000007FF0000000000000'.decode('hex')
-    if sys.byteorder != 'big':
-        _BYTES = _BYTES[:8][::-1] + _BYTES[8:][::-1]
-    nan, inf = struct.unpack('dd', _BYTES)
-    return nan, inf, -inf
-
-NaN, PosInf, NegInf = _floatconstants()
-
 
 def linecol(doc, pos):
     lineno = doc.count('\n', 0, pos) + 1
@@ -56,7 +46,7 @@ DEFAULT_ENCODING = "utf-8"
 
 def py_scanstring(s, end, encoding=None, strict=True,
         _b=BACKSLASH, _m=STRINGCHUNK.match):
-    """Scan the string s for a DSON string. End is the index of the
+    r"""Scan the string s for a DSON string. End is the index of the
     character in s after the quote that started the DSON string.
     Unescapes all valid DSON string escape sequences and raises ValueError
     on attempt to decode an invalid string. If strict is False then literal
@@ -111,12 +101,12 @@ def py_scanstring(s, end, encoding=None, strict=True,
             esc = s[end + 1:end + 5]
             next_end = end + 5
             if len(esc) != 4:
-                msg = "Invalid \\uXXXX escape"
+                msg = "Invalid unicode escape"
                 raise ValueError(errmsg(msg, s, end))
             uni = int(esc, 16)
             # Check for surrogate pair on UCS-4 systems
             if 0xd800 <= uni <= 0xdbff and sys.maxunicode > 65535:
-                msg = "Invalid \\uXXXX\\uXXXX surrogate pair"
+                msg = "Invalid unicode surrogate pair"
                 if not s[end + 5:end + 7] == '\\u':
                     raise ValueError(errmsg(msg, s, end))
                 esc2 = s[end + 7:end + 11]
@@ -267,7 +257,7 @@ def DSONArray(s_and_end, scan_once, _w=WHITESPACE.match, _ws=WHITESPACE_STR):
     return values, end
 
 class DSONDecoder(object):
-    """Simple DSON decoder
+    r"""Simple DSON decoder
 
     Performs the following translations in decoding by default:
 
@@ -299,7 +289,7 @@ class DSONDecoder(object):
     def __init__(self, encoding=None, object_hook=None, parse_float=None,
             parse_int=None, parse_constant=None, strict=True,
             object_pairs_hook=None):
-        """``encoding`` determines the encoding used to interpret any ``str``
+        r"""``encoding`` determines the encoding used to interpret any ``str``
         objects decoded by this instance (utf-8 by default).  It has no
         effect when decoding ``unicode`` objects.
 
@@ -354,7 +344,7 @@ class DSONDecoder(object):
         self.scan_once = scanner.make_scanner(self)
 
     def decode(self, s, _w=WHITESPACE.match):
-        """Return the Python representation of ``s`` (a ``str`` or ``unicode``
+        r"""Return the Python representation of ``s`` (a ``str`` or ``unicode``
         instance containing a DSON document)
 
         """
@@ -365,7 +355,7 @@ class DSONDecoder(object):
         return obj
 
     def raw_decode(self, s, idx=0):
-        """Decode a DSON document from ``s`` (a ``str`` or ``unicode``
+        r"""Decode a DSON document from ``s`` (a ``str`` or ``unicode``
         beginning with a DSON document) and return a 2-tuple of the Python
         representation and the index in ``s`` where the document ended.
 

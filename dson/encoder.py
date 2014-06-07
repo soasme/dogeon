@@ -1,6 +1,7 @@
 """Implementation of DSONEncoder
 """
 import re
+from ._compact import basestring, long, iteritems
 
 ESCAPE = re.compile(r'[\x00-\x1f\\"\b\f\n\r\t]')
 ESCAPE_ASCII = re.compile(r'([\\"]|[^\ -~])')
@@ -98,7 +99,7 @@ class DSONEncoder(object):
         skipkeys is True, such items are simply skipped.
 
         If *ensure_ascii* is true (the default), all non-ASCII
-        characters in the output are escaped with \uXXXX sequences,
+        characters in the output are escaped with \\uXXXX sequences,
         and the results are str instances consisting of ASCII
         characters only.  If ensure_ascii is False, a result may be a
         unicode instance.  This usually happens if the input contains
@@ -344,7 +345,7 @@ def _make_iterencode(markers, _default, _encoder, _indent, _floatstr,
         if _sort_keys:
             items = sorted(dct.items(), key=lambda kv: kv[0])
         else:
-            items = dct.iteritems()
+            items = iteritems(dct)
         for key, value in items:
             if isinstance(key, basestring):
                 pass

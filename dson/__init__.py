@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 r""" DSON (Doge Serialized Object Notation) <http://dogeon.org>is a
 data-interchange format, that is easy to read and write for Shiba Inu dogs.
 It is easy for machines to parse and generate.
@@ -132,7 +133,7 @@ def dump(obj, fp, skipkeys=False, ensure_ascii=True, check_circular=True,
     will be skipped instead of raising a ``TypeError``.
 
     If ``ensure_ascii`` is true (the default), all non-ASCII characters in the
-    output are escaped with ``\uXXXX`` sequences, and the result is a ``str``
+    output are escaped with ``\\uXXXX`` sequences, and the result is a ``str``
     instance consisting of ASCII characters only.  If ``ensure_ascii`` is
     ``False``, some chunks written to ``fp`` may be ``unicode`` instances.
     This usually happens because the input contains unicode strings or the
@@ -195,7 +196,7 @@ def dump(obj, fp, skipkeys=False, ensure_ascii=True, check_circular=True,
 def dumps(obj, skipkeys=False, ensure_ascii=True, check_circular=True,
         allow_nan=True, cls=None, indent=None, separators=None,
         encoding='utf-8', default=None, sort_keys=False, **kw):
-    """Serialize ``obj`` to a DSON formatted ``str``.
+    r"""Serialize ``obj`` to a DSON formatted ``str``.
 
     If ``skipkeys`` is false then ``dict`` keys that are not basic types
     (``str``, ``unicode``, ``int``, ``long``, ``float``, ``bool``, ``None``)
@@ -258,7 +259,7 @@ _default_decoder = DSONDecoder(encoding=None, object_hook=None,
 
 def load(fp, encoding=None, cls=None, object_hook=None, parse_float=None,
         parse_int=None, parse_constant=None, object_pairs_hook=None, **kw):
-    """Deserialize ``fp`` (a ``.read()``-supporting file-like object containing
+    r"""Deserialize ``fp`` (a ``.read()``-supporting file-like object containing
     a DSON document) to a Python object.
 
     If the contents of ``fp`` is encoded with an ASCII based encoding other
@@ -294,7 +295,7 @@ def load(fp, encoding=None, cls=None, object_hook=None, parse_float=None,
 
 def loads(s, encoding=None, cls=None, object_hook=None, parse_float=None,
         parse_int=None, parse_constant=None, object_pairs_hook=None, **kw):
-    """Deserialize ``s`` (a ``str`` or ``unicode`` instance containing a DSON
+    r"""Deserialize ``s`` (a ``str`` or ``unicode`` instance containing a DSON
     document) to a Python object.
 
     If ``s`` is a ``str`` instance and is encoded with an ASCII based encoding
