@@ -18,7 +18,7 @@ Encoding basic Python object hierarchies::
 
     >>> import dson
     >>> dson.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
-    '["foo", {"bar": ["baz", null, 1.0, 2]}]'
+    'so "foo" and such "bar" is so "baz" and empty and 1.0 and 2 many wow many'
     >>> print dson.dumps("\"foo\bar")
     "\"foo\bar"
     >>> print dson.dumps(u'\u1234')
@@ -26,39 +26,38 @@ Encoding basic Python object hierarchies::
     >>> print dson.dumps('\\')
     "\\"
     >>> print dson.dumps({"c": 0, "b": 0, "a": 0}, sort_keys=True)
-    {"a": 0, "b": 0, "c": 0}
+    'such "a" is 0, "b" is 0, "c" is 0 wow'
     >>> from StringIO import StringIO
     >>> io = StringIO()
     >>> dson.dump(['streaming API'], io)
     >>> io.getvalue()
-    '["streaming API"]'
+    'so "streaming API" many'
 
 Compact encoding::
 
     >>> import dson
     >>> dson.dumps([1,2,3,{'4': 5, '6': 7}], sort_keys=True, separators=(',',':'))
-    '[1,2,3,{"4":5,"6":7}]'
+    'so 1 and 2 and 3 and such "4" is 5,"6" is 7 wow many'
 
 Pretty printing::
 
     >>> import dson
-    >>> print dson.dumps({'4': 5, '6': 7}, sort_keys=True,
-    ...                  indent=4, separators=(',', ': '))
-    {
-        "4": 5,
-        "6": 7
-    }
+    >>> print dson.dumps({'4': 5, '6': 7}, sort_keys=True, indent=4)
+    such
+        "4" is 5,
+        "6" is 7
+    wow
 
 Decoding DSON::
 
     >>> import dson
     >>> obj = [u'foo', {u'bar': [u'baz', None, 1.0, 2]}]
-    >>> dson.loads('["foo", {"bar":["baz", null, 1.0, 2]}]') == obj
+    >>> dson.loads('so "foo" and such "bar" is so "baz" and empty and 1.0 and 2 many wow many') == obj
     True
     >>> dson.loads('"\\"foo\\bar"') == u'"foo\x08ar'
     True
     >>> from StringIO import StringIO
-    >>> io = StringIO('["streaming API"]')
+    >>> io = StringIO('so "streaming API" many')
     >>> dson.load(io)[0] == 'streaming API'
     True
 
@@ -70,7 +69,7 @@ Specializing DSON object decoding::
     ...         return complex(dct['real'], dct['imag'])
     ...     return dct
     ...
-    >>> dson.loads('{"__complex__": true, "real": 1, "imag": 2}',
+    >>> dson.loads('such "__complex__" is yes, "real" is 1, "imag" is 2 wow',
     ...     object_hook=as_complex)
     (1+2j)
     >>> from decimal import Decimal
@@ -86,14 +85,14 @@ Specializing DSON object encoding::
     ...     raise TypeError(repr(o) + " is not DSON serializable")
     ...
     >>> dson.dumps(2 + 1j, default=encode_complex)
-    '[2.0, 1.0]'
+    'so 2.0 and 1.0 many'
     >>> dson.DSONEncoder(default=encode_complex).encode(2 + 1j)
-    '[2.0, 1.0]'
+    'so 2.0 and 1.0 many'
     >>> ''.join(dson.DSONEncoder(default=encode_complex).iterencode(2 + 1j))
-    '[2.0, 1.0]'
+    'so 2.0 and 1.0 many'
 
 
-Using dson.tool from the shell to validate and pretty-print::
+TODO: Using dson.tool from the shell to validate and pretty-print::
 
     $ echo '{"dson":"obj"}' | python -m dson.tool
     {
@@ -102,7 +101,7 @@ Using dson.tool from the shell to validate and pretty-print::
     $ echo '{ 1.2:3.4}' | python -m dson.tool
     Expecting property name enclosed in double quotes: line 1 column 3 (char 2)
 """
-__version__ = '0.0.1'
+__version__ = '1.0.0'
 __all__ = [
     'dump', 'dumps', 'load', 'loads',
     'DSONDecoder', 'DSONEncoder',
@@ -158,8 +157,8 @@ def dump(obj, fp, skipkeys=False, ensure_ascii=True, check_circular=True,
     You can use ``separators=(',', ': ')`` to avoid this.
 
     If ``separators`` is an ``(item_separator, dict_separator)`` tuple
-    then it will be used instead of the default ``(', ', ': ')`` separators.
-    ``(',', ':')`` is the most compact DSON representation.
+    then it will be used instead of the default ``('and ', 'is ')`` separators.
+    ``('and', 'is')`` is the most compact DSON representation.
 
     ``encoding`` is the character encoding for str instances, default is UTF-8.
 
@@ -219,11 +218,11 @@ def dumps(obj, skipkeys=False, ensure_ascii=True, check_circular=True,
     level of 0 will only insert newlines. ``None`` is the most compact
     representation.  Since the default item separator is ``', '``,  the
     output might include trailing whitespace when ``indent`` is specified.
-    You can use ``separators=(',', ': ')`` to avoid this.
+    You can use ``separators=('and ', 'is ')`` to avoid this.
 
     If ``separators`` is an ``(item_separator, dict_separator)`` tuple
-    then it will be used instead of the default ``(', ', ': ')`` separators.
-    ``(',', ':')`` is the most compact DSON representation.
+    then it will be used instead of the default ``('and ', 'is ')`` separators.
+    ``('and', 'is')`` is the most compact DSON representation.
 
     ``encoding`` is the character encoding for str instances, default is UTF-8.
 
