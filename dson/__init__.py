@@ -102,7 +102,7 @@ Specializing DSON object encoding::
     $ echo 'such 1.2 is 3.4 wow' | python -m dson.tool
     Expecting property name enclosed in double quotes: line 1 column 3 (char 2)
 """
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __all__ = [
     'dump', 'dumps', 'load', 'loads',
     'DSONDecoder', 'DSONEncoder',

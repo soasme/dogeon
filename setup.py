@@ -18,7 +18,7 @@ the object_hook or object_pairs_hook kwargs.
 
 setup(
     name="Dogeon",
-    version='1.0',
+    version='1.0.1',
     author="Ju Lin",
     author_email="soasme@gmail.com",
     description="Simple, fast, extensible DSON encoder/decoder for Python",
