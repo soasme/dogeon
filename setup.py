@@ -26,7 +26,7 @@ setup(
     license="MIT License",
     keywords="DSON dson Dogeon",
     url="https://github.com/soasme/dogeon",
-    packages=['dogeon'],
+    packages=['dson'],
     classifiers=[
         "Development Status :: 4 - Beta",
         'Intended Audience :: Developers',
