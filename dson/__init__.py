@@ -36,7 +36,7 @@ Encoding basic Python object hierarchies::
 Compact encoding::
 
     >>> import dson
-    >>> dson.dumps([1,2,3,{'4': 5, '6': 7}], sort_keys=True, separators=(',',':'))
+    >>> dson.dumps([1,2,3,{'4': 5, '6': 7}], sort_keys=True)
     'so 1 and 2 and 3 and such "4" is 5,"6" is 7 wow many'
 
 Pretty printing::
