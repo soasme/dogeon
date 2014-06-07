@@ -122,13 +122,13 @@ class DSONEncoder(object):
         elements and object members will be pretty-printed with that
         indent level.  An indent level of 0 will only insert newlines.
         None is the most compact representation.  Since the default
-        item separator is ', ',  the output might include trailing
+        item separator is 'and ',  the output might include trailing
         whitespace when indent is specified.  You can use
-        separators=(',', ': ') to avoid this.
+        separators=('and', 'is ') to avoid this.
 
         If specified, separators should be a (item_separator, key_separator)
-        tuple.  The default is (', ', ': ').  To get the most compact DSON
-        representation you should specify (',', ':') to eliminate whitespace.
+        tuple.  The default is ('and ', 'is ').  To get the most compact DSON
+        representation you should specify ('and', 'is') to eliminate whitespace.
 
         If specified, default is a function that gets called for objects
         that can't otherwise be serialized.  It should return a DSON encodable
@@ -177,7 +177,7 @@ class DSONEncoder(object):
         """Return a DSON string representation of a Python data structure.
 
         >>> DSONEncoder().encode({"foo": ["bar", "baz"]})
-        '{"foo": ["bar", "baz"]}'
+        'such "foo" is so "bar" and "baz" many wow'
 
         """
         # This is for extremely simple cases and benchmarks.

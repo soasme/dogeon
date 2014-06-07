@@ -92,13 +92,13 @@ Specializing DSON object encoding::
     'so 2.0 and 1.0 many'
 
 
-TODO: Using dson.tool from the shell to validate and pretty-print::
+`todo` Using dson.tool from the shell to validate and pretty-print::
 
-    $ echo '{"dson":"obj"}' | python -m dson.tool
+    $ echo 'such "dson" is "obj" wow' | python -m dson.tool
     {
         "dson": "obj"
     }
-    $ echo '{ 1.2:3.4}' | python -m dson.tool
+    $ echo 'such 1.2 is 3.4 wow' | python -m dson.tool
     Expecting property name enclosed in double quotes: line 1 column 3 (char 2)
 """
 __version__ = '1.0.0'
