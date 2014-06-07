@@ -1,4 +1,3 @@
-from setuptools import setup
 """
 - What is Dogeon?
 
@@ -15,6 +14,8 @@ The decoder can handle incoming DSON strings of any specified encoding
 the object_hook or object_pairs_hook kwargs.
 
 """
+
+from setuptools import setup
 
 setup(
     name="Dogeon",
