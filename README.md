@@ -3,6 +3,8 @@ dogeon
 
 DSON encoder/decoder for Python
 
+![Doge](http://dogeon.org/doge.gif)
+
 
 ### What is Dogeon?
 
