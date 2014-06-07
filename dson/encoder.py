@@ -86,8 +86,8 @@ class DSONEncoder(object):
     implementation (to raise ``TypeError``).
 
     """
-    item_separator = ' and '
-    dict_item_seperator = ', '
+    item_separator = ' and'
+    dict_item_seperator = ','
     key_separator = ' is '
     def __init__(self, skipkeys=False, ensure_ascii=True,
             check_circular=True, allow_nan=True, sort_keys=False,
@@ -279,15 +279,15 @@ def _make_iterencode(markers, _default, _encoder, _indent, _floatstr,
             if markerid in markers:
                 raise ValueError("Circular reference detected")
             markers[markerid] = lst
-        buf = 'so '
         if _indent is not None:
             _current_indent_level += 1
             newline_indent = '\n' + (' ' * (_indent * _current_indent_level))
             separator = _item_separator + newline_indent
-            buf += newline_indent
+            buf = 'so' + newline_indent
         else:
             newline_indent = None
-            separator = _item_separator
+            separator = _item_separator + ' '
+            buf = 'so '
         first = True
         for value in lst:
             if first:
@@ -319,7 +319,9 @@ def _make_iterencode(markers, _default, _encoder, _indent, _floatstr,
         if newline_indent is not None:
             _current_indent_level -= 1
             yield '\n' + (' ' * (_indent * _current_indent_level))
-        yield ' many'
+        else:
+            yield ' '
+        yield 'many'
         if markers is not None:
             del markers[markerid]
 
@@ -332,15 +334,16 @@ def _make_iterencode(markers, _default, _encoder, _indent, _floatstr,
             if markerid in markers:
                 raise ValueError("Circular reference detected")
             markers[markerid] = dct
-        yield 'such '
+        yield 'such'
         if _indent is not None:
             _current_indent_level += 1
             newline_indent = '\n' + (' ' * (_indent * _current_indent_level))
             item_separator = _dict_item_separator + newline_indent
             yield newline_indent
         else:
+            yield ' '
             newline_indent = None
-            item_separator = _dict_item_separator
+            item_separator = _dict_item_separator + ' '
         first = True
         if _sort_keys:
             items = sorted(dct.items(), key=lambda kv: kv[0])
@@ -395,7 +398,9 @@ def _make_iterencode(markers, _default, _encoder, _indent, _floatstr,
         if newline_indent is not None:
             _current_indent_level -= 1
             yield '\n' + (' ' * (_indent * _current_indent_level))
-        yield ' wow'
+        else:
+            yield ' '
+        yield 'wow'
         if markers is not None:
             del markers[markerid]
 

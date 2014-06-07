@@ -17,7 +17,7 @@ so
   "d-shtaeou" and
   "d-nthiouh" and
   "i-vhbjkhnth" and
-  such 
+  such
     "nifty" is 87
   wow and
   such
