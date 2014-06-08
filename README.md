@@ -1,7 +1,7 @@
 dogeon
 ======
 
-DSON encoder/decoder for Python
+DSON encoder/decoder for Python ![Build Status](https://travis-ci.org/soasme/dogeon.svg?branch=master)
 
 ![Doge](http://dogeon.org/doge.gif)
 
