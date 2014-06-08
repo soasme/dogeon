@@ -1,6 +1,9 @@
 import textwrap
-from StringIO import StringIO
 import dson
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 
 def test_indent():

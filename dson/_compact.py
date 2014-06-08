@@ -27,6 +27,8 @@ if PY2:
     basestring = basestring
     long = long
     iteritems = lambda x: x.iteritems()
+    xrange = xrange
+    unichr = unichr
 else:
     str = str
     unicode = str
@@ -34,3 +36,5 @@ else:
     basestring = (str,bytes)
     long = int
     iteritems = lambda x: iter(x.items())
+    xrange = range
+    unichr = chr

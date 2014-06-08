@@ -1,5 +1,9 @@
-from cStringIO import StringIO
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from io import StringIO
 import dson
+from dson._compact import long
 
 
 def test_dump():
@@ -14,7 +18,7 @@ def test_encode_truefalse():
     assert dson.dumps({True: False, False: True}, sort_keys=True) == \
             'such "no" is yes, "yes" is no wow'
     assert dson.dumps(
-            {2: 3.0, 4.0: 5L, False: 1, 6L: True}, sort_keys=True) == \
+            {2: 3.0, 4.0: long(5), False: 1, long(6): True}, sort_keys=True) == \
             'such "no" is 1, "2" is 3.0, "4.0" is 5, "6" is yes wow'
 
 # Issue 16228: Crash on encoding resized list

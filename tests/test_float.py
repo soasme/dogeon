@@ -1,6 +1,7 @@
 import math
 import dson
 import pytest
+from dson._compact import long, unicode
 
 @pytest.mark.parametrize('num', [
     1617161771.7650001,
@@ -14,7 +15,7 @@ def test_floats(num):
 
 @pytest.mark.parametrize('num', [
     1,
-    1L,
+    long(1),
     1<<32,
     1<<64])
 def test_ints(num):

@@ -1,6 +1,7 @@
 import dson
 from collections import OrderedDict
 from unittest import TestCase
+from dson._compact import unichr, unicode
 
 class TestUnicode(TestCase):
     def setUp(self):

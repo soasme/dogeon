@@ -4,7 +4,7 @@ import re
 import sys
 
 from . import scanner
-from ._compact import NaN, PosInf, NegInf, unicode
+from ._compact import NaN, PosInf, NegInf, unicode, unichr
 
 __all__ = ['DSONDecoder']
 

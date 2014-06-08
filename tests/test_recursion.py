@@ -1,5 +1,6 @@
 import dson
 import pytest
+from dson._compact import xrange
 
 
 class DSONTestObject(object):

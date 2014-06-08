@@ -1,8 +1,12 @@
 import decimal
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 from collections import OrderedDict
 import dson
 import pytest
+from dson._compact import unicode
 
 def test_decimal():
     rval = dson.loads('1.1', parse_float=decimal.Decimal)
@@ -50,10 +54,9 @@ def test_empty_object_pairs_hook():
 def test_extra_data():
     s = 'so 1 and 2 also 3 many 5'
     with pytest.raises(ValueError) as e: dson.loads(s)
-    assert 'Extra data' in e.value.message
+    assert 'Extra data' in str(e)
 
 def test_invalid_escape():
     s = 'so "abc\\y" many'
-    msg = 'escape'
     with pytest.raises(ValueError) as e: dson.loads(s)
-    assert 'escape' in e.value.message
+    assert 'escape' in str(e)
