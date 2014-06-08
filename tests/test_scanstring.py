@@ -94,6 +94,8 @@ def test_scanstring():
         scanstring('["Bad value", truth]', 2, None, True) == \
         (u'Bad value', 12)
 
+
+@pytest.mark.skipif(sys.version_info > (3,0), reason="requires PY2")
 def test_issue3623():
     pytest.raises(ValueError, dson.decoder.scanstring, b"xxx", 1 == \
                         "xxx")

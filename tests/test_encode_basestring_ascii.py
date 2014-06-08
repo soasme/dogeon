@@ -1,7 +1,9 @@
+import sys
 from collections import OrderedDict
 import pytest
 import dson
 
+@pytest.mark.skipif(sys.version_info > (3,0), reason="requires PY2")
 @pytest.mark.parametrize('input, expect', [
     (u'/\\"\ucafe\ubabe\uab98\ufcde\ubcda\uef4a\x08\x0c\n\r\t`1~!@#$%^&*()_+-=[]{}|;:\',./<>?', '"/\\\\\\"\\ucafe\\ubabe\\uab98\\ufcde\\ubcda\\uef4a\\b\\f\\n\\r\\t`1~!@#$%^&*()_+-=[]{}|;:\',./<>?"'),
     (u'\u0123\u4567\u89ab\ucdef\uabcd\uef4a', '"\\u0123\\u4567\\u89ab\\ucdef\\uabcd\\uef4a"'),

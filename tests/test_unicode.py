@@ -2,7 +2,10 @@ import dson
 from collections import OrderedDict
 from unittest import TestCase
 from dson._compact import unichr, unicode
+import sys
+import pytest
 
+@pytest.mark.skipif(sys.version_info > (3,0), reason="requires PY2")
 class TestUnicode(TestCase):
     def setUp(self):
         self.dumps = dson.dumps

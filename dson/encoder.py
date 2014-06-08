@@ -1,7 +1,7 @@
 """Implementation of DSONEncoder
 """
 import re
-from ._compact import basestring, long, iteritems
+from ._compact import basestring, long, iteritems, PY2
 
 ESCAPE = re.compile(r'[\x00-\x1f\\"\b\f\n\r\t]')
 ESCAPE_ASCII = re.compile(r'([\\"]|[^\ -~])')
@@ -34,7 +34,7 @@ def py_encode_basestring_ascii(s):
     """Return an ASCII-only DSON representation of a Python string
 
     """
-    if isinstance(s, str) and HAS_UTF8.search(s) is not None:
+    if PY2 and isinstance(s, str) and HAS_UTF8.search(s) is not None:
         s = s.decode('utf-8')
     def replace(match):
         s = match.group(0)
@@ -52,7 +52,10 @@ def py_encode_basestring_ascii(s):
                 s2 = 0xdc00 | (n & 0x3ff)
                 return '\\u{0:04x}\\u{1:04x}'.format(s1, s2)
                 #return '\\u%04x\\u%04x' % (s1, s2)
-    return '"' + str(ESCAPE_ASCII.sub(replace, s)) + '"'
+    if PY2:
+        return '"' + str(ESCAPE_ASCII.sub(replace, s)) + '"'
+    else:
+        return '"' + ESCAPE_ASCII.sub(replace, s) + '"'
 
 
 encode_basestring_ascii = py_encode_basestring_ascii
