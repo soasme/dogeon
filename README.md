@@ -20,6 +20,10 @@ The decoder can handle incoming DSON strings of any specified encoding
 (UTF-8 by default). It can also be specialized to post-process DSON objects with
 the object_hook or object_pairs_hook kwargs.
 
+### How to install `Dogeon`?
+
+    $ pip install dogeon
+
 ### How to use `Dogeon`?
 
 It has completely the same API with standard `json` library.
