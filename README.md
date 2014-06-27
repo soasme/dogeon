@@ -13,7 +13,7 @@ encoder and decoder for Python.  It is pure Python code with no dependencies.
 
 The encoder can be specialized to provide serialization in any kind of situation,
 without any special support by the objects to be serialized (somewhat like pickle).
-This is best done with the default kwarg to dumps.
+This is best done with the `default` kwarg to the `dson.dumps()` function.
 
 The decoder can handle incoming DSON strings of any specified encoding
 (UTF-8 by default). It can also be specialized to post-process DSON objects with
