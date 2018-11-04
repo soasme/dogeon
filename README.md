@@ -12,7 +12,7 @@ DSON encoder/decoder for Python
 
 ### What is Dogeon?
 
-`Dogeon` is a simple, fast, complete, correct and extensible DSON <http://dogeon.org>
+`Dogeon` is a simple, fast, complete, correct and extensible DSON <https://dogeon.xyz/>
 encoder and decoder for Python.  It is pure Python code with no dependencies.
 
 The encoder can be specialized to provide serialization in any kind of situation,
